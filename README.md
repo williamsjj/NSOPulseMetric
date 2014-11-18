@@ -8,6 +8,7 @@ Success and failure callbacks can be `nil`.
 Direct metric example:
 
 ```Objective-C
+#import <NSOPulseMetric.h>
 NSOPulseMetric* pulse_metric = [[NSOPulseMetric alloc] initWithAppID:@"nmkj234"
                                                                jobID:@"def456"
                                                            authToken:1234567890];
@@ -22,6 +23,7 @@ NSOPulseMetric* pulse_metric = [[NSOPulseMetric alloc] initWithAppID:@"nmkj234"
 
 Resolver mapping example:
 ```Objective-C
+#import <NSOPulseMetric.h>
 NSOPulseMetric* pulse_metric = [[NSOPulseMetric alloc] initWithAppID:@"zxs123"
                                                                jobID:@"abc123"
                                                            authToken:1234567890];
