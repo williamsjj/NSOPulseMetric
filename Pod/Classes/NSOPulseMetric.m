@@ -34,8 +34,7 @@
 ////////////////////////////////////////////////////////////////////
 
 #import "NSOPulseMetric.h"
-
-#define kRandomStringSet @"abcdefghijklmnopqrstuvwxyz0123456789"
+#import "NSOUtility.h"
 
 #define kBaseAPIDomain @"ns1p.net"
 
@@ -70,15 +69,15 @@
       successHandler:(successBlock)success_handler
       failureHandler:(failureBlock)failure_handler {
     
-    NSUInteger trans_num = [self transactionNumber];
+    NSUInteger trans_num = [NSOUtility transactionNumber];
     
     NSString* metric_value = [NSString stringWithFormat:@"%.03f",(latency/1000)];
     
     NSURL* api_url = [NSURL URLWithString:[NSString stringWithFormat:kDirectMetricAPI,
                                                     _base_api_endpoint,
                                                     _app_id,
-                                                    [self base36Encode:trans_num],
-                                                    [self signature:trans_num],
+                                                    [NSOUtility base36Encode:trans_num],
+                                                    [NSOUtility signature:trans_num usingToken:_token],
                                                     _job_id,
                                                     metric_value]];
     
@@ -98,16 +97,16 @@
 - (NSString*) sendResolverMapping:(successBlock)success_handler
                    failureHandler:(failureBlock)failure_handler {
     
-    unsigned int trans_num = [self transactionNumber];
-    NSString* rand_domain = [self randomStringWithLength:10];
+    NSUInteger trans_num = [NSOUtility transactionNumber];
+    NSString* rand_domain = [NSOUtility randomStringWithLength:10];
     
     NSURL* api_url = [NSURL URLWithString:[NSString stringWithFormat:kResolverMetricAPI,
                                            rand_domain,
                                            _base_api_endpoint,
                                            _app_id,
                                            _job_id,
-                                           [self base36Encode:trans_num],
-                                           [self signature:trans_num]]];
+                                           [NSOUtility base36Encode:trans_num],
+                                           [NSOUtility signature:trans_num usingToken:_token]]];
     
     NSMutableURLRequest* api_req = [NSMutableURLRequest requestWithURL:api_url];
     
@@ -122,54 +121,6 @@
     [operation start];
     
     return rand_domain;
-}
-
-#pragma mark - Internal Utility Helpers
-- (unsigned int) transactionNumber {
-    return arc4random_uniform(UINT_MAX);
-}
-                      
-- (NSString*) base36Encode:(unsigned int)base10_input {
-    //Modified from: https://gist.github.com/furkanmustafa/5660086
-    NSMutableString* final = NSMutableString.string;
-    int temp, j;
-    
-    j = -1;
-    do {
-        temp = base10_input % 36;
-        if (temp < 10)
-            [final appendFormat:@"%c", 48 + temp];
-        else
-            [final appendFormat:@"%c", 65 + temp - 10];
-        base10_input = base10_input / 36;
-    } while (base10_input != 0);
-    
-    const char* chars = [final cStringUsingEncoding:NSASCIIStringEncoding];
-    int length = strlen(chars);
-    char* new = (char*)malloc(length+1);
-    for (int i = 0; i < length; i++)
-        new[i] = chars[length - i - 1];
-    new[length] = '\0';
-    NSString* reverseString = [NSString stringWithCString:new encoding:NSASCIIStringEncoding];
-    free(new);
-    return reverseString;
-}
-                      
-- (NSString*) signature:(NSUInteger)transaction_number {
-    unsigned int minute = (unsigned int)floor([[NSDate date] timeIntervalSince1970]/60);
-    return [NSString stringWithFormat:@"%du",(_token^transaction_number^minute)];
-}
-
-- (NSString*) randomStringWithLength:(int)len {
-    
-    NSMutableString* randomString = [NSMutableString stringWithCapacity: len];
-    
-    for (int i=0; i<len; i++) {
-        [randomString appendFormat:@"%C",
-         [kRandomStringSet characterAtIndex:arc4random_uniform([kRandomStringSet length])]];
-    }
-    
-    return randomString;
 }
 
 #pragma mark - Property Handlers
