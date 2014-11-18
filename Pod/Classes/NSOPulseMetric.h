@@ -44,14 +44,15 @@ typedef void (^failureBlock)(AFHTTPRequestOperation *operation, NSError *error);
 @property (nonatomic, strong) NSString* api_base_domain;
 
 - (NSOPulseMetric*) initWithAppID:(NSString*)app_id
-                            jobID:(NSString*)job_id
                         authToken:(unsigned int)token;
 
 - (void) sendLatency:(NSTimeInterval)latency
+               jobID:(NSString*)job_id
       successHandler:(successBlock)success_handler
       failureHandler:(failureBlock)failure_handler;
 
-- (NSString*) sendResolverMapping:(successBlock)success_handler
+- (NSString*) sendResolverMapping:(NSString*)job_id
+                   successHandler:(successBlock)success_handler
                    failureHandler:(failureBlock)failure_handler;
 
 @end

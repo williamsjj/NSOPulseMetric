@@ -48,17 +48,15 @@
 @implementation NSOPulseMetric {
     NSString* _base_api_endpoint;
     NSString* _app_id;
-    NSString* _job_id;
     unsigned int _token;
 }
 
 - (NSOPulseMetric*) initWithAppID:(NSString*)app_id
-                            jobID:(NSString*)job_id
                         authToken:(unsigned int)token {
     if(self = [super init]) {
         _base_api_endpoint = kBaseAPIDomain;
+        NSAssert(app_id!=nil, @"NSONE app_id cannot be nil.");
         _app_id = [app_id copy];
-        _job_id = [job_id copy];
         _token = token;
     }
     
@@ -66,8 +64,11 @@
 }
 
 - (void) sendLatency:(NSTimeInterval)latency
+               jobID:(NSString*)job_id
       successHandler:(successBlock)success_handler
       failureHandler:(failureBlock)failure_handler {
+    
+    NSAssert(job_id!=nil, @"NSONE job_id cannot be nil.");
     
     NSUInteger trans_num = [NSOUtility transactionNumber];
     
@@ -78,7 +79,7 @@
                                                     _app_id,
                                                     [NSOUtility base36Encode:trans_num],
                                                     [NSOUtility signature:trans_num usingToken:_token],
-                                                    _job_id,
+                                                    [job_id copy],
                                                     metric_value]];
     
     NSMutableURLRequest* api_req = [NSMutableURLRequest requestWithURL:api_url];
@@ -94,7 +95,8 @@
     [operation start];
 }
 
-- (NSString*) sendResolverMapping:(successBlock)success_handler
+- (NSString*) sendResolverMapping:(NSString*)job_id
+                   successHandler:(successBlock)success_handler
                    failureHandler:(failureBlock)failure_handler {
     
     NSUInteger trans_num = [NSOUtility transactionNumber];
@@ -104,7 +106,7 @@
                                            rand_domain,
                                            _base_api_endpoint,
                                            _app_id,
-                                           _job_id,
+                                           [job_id copy],
                                            [NSOUtility base36Encode:trans_num],
                                            [NSOUtility signature:trans_num usingToken:_token]]];
     

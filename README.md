@@ -10,9 +10,9 @@ Direct metric example:
 ```Objective-C
 #import <NSOPulseMetric.h>
 NSOPulseMetric* pulse_metric = [[NSOPulseMetric alloc] initWithAppID:@"nmkj234"
-                                                               jobID:@"def456"
                                                            authToken:1234567890];
 [pulse_metric sendLatency:1.0 //NSTimeInterval in secs
+				    jobID:@"def456"
            successHandler:^{ /*Success callback...can be nil*/ }
            failureHandler:^(AFHTTPRequestOperation *operation, NSError *error) {
                NSLog(@"NSONE Latency Transmission Error (%@)(%@)",
@@ -25,10 +25,10 @@ Resolver mapping example:
 ```Objective-C
 #import <NSOPulseMetric.h>
 NSOPulseMetric* pulse_metric = [[NSOPulseMetric alloc] initWithAppID:@"zxs123"
-                                                               jobID:@"abc123"
                                                            authToken:1234567890];
     
-[pulse_metric sendResolverMapping:^{ /*Success callback...can be nil*/ }
+[pulse_metric sendResolverMapping:@"abc123"
+				   successHandler:^{ /*Success callback...can be nil*/ }
                    failureHandler:^(AFHTTPRequestOperation *operation, NSError *error) {
                        NSLog(@"NSONE Resolver Mapping Transmission Error (%@)(%@)",
                              operation,
