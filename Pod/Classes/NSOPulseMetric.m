@@ -72,7 +72,7 @@
     
     NSUInteger trans_num = [NSOUtility transactionNumber];
     
-    NSString* metric_value = [NSString stringWithFormat:@"%.03f",(latency/1000)];
+    NSString* metric_value = [NSString stringWithFormat:@"%.03f",(latency*1000)];
     
     NSURL* api_url = [NSURL URLWithString:[NSString stringWithFormat:kDirectMetricAPI,
                                                     _base_api_endpoint,
