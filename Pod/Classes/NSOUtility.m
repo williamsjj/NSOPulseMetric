@@ -70,7 +70,7 @@
 
 + (NSString*) signature:(NSUInteger)transaction_number usingToken:(NSUInteger)token {
     NSUInteger minute = (NSUInteger)floor([[NSDate date] timeIntervalSince1970]/60);
-    return [NSString stringWithFormat:@"%lu",(unsigned long)(token^transaction_number^minute)];
+    return [NSOUtility base36Encode:token^transaction_number^minute];
 }
 
 
