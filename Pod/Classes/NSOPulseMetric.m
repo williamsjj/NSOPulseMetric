@@ -4,7 +4,7 @@
 // DESCRIPTION:
 //
 ////////////////////////////////////////////////////////////////////
-// (C)2014 DigiTar, All Rights Reserved
+// (C)2015 DigiTar, All Rights Reserved
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -51,7 +51,7 @@
     unsigned int _token;
 }
 
-- (NSOPulseMetric*) initWithAppID:(NSString*)app_id
+- (NSOPulseMetric*) initWithAppID:(NSString* _Nonnull)app_id
                         authToken:(unsigned int)token {
     if(self = [super init]) {
         _base_api_endpoint = kBaseAPIDomain;
@@ -64,9 +64,9 @@
 }
 
 - (void) sendLatency:(NSTimeInterval)latency
-               jobID:(NSString*)job_id
-      successHandler:(successBlock)success_handler
-      failureHandler:(failureBlock)failure_handler {
+               jobID:(NSString* _Nonnull)job_id
+      successHandler:(successBlock _Nullable)success_handler
+      failureHandler:(failureBlock _Nullable)failure_handler {
     
     NSAssert(job_id!=nil, @"NSONE job_id cannot be nil.");
     
@@ -104,9 +104,9 @@
     [latency_task resume];
 }
 
-- (NSString*) sendResolverMapping:(NSString*)job_id
-                   successHandler:(successBlock)success_handler
-                   failureHandler:(failureBlock)failure_handler {
+- (NSString*) sendResolverMapping:(NSString* _Nonnull)job_id
+                   successHandler:(successBlock _Nullable)success_handler
+                   failureHandler:(failureBlock _Nullable)failure_handler {
     
     NSUInteger trans_num = [NSOUtility transactionNumber];
     NSString* rand_domain = [NSOUtility randomStringWithLength:10];
@@ -145,7 +145,7 @@
 
 #pragma mark - Property Handlers
 
-- (NSString*) api_base_domain {
+- (NSString* _Nonnull) api_base_domain {
     return [_base_api_endpoint copy];
 }
 

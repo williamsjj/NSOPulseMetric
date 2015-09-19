@@ -4,7 +4,7 @@
 // DESCRIPTION:
 //
 ////////////////////////////////////////////////////////////////////
-// (C)2014 DigiTar, All Rights Reserved
+// (C)2015 DigiTar, All Rights Reserved
 // All rights reserved.
 //
 // Redistribution and use in source and binary forms, with or without
@@ -37,22 +37,22 @@
 #import <AFNetworking.h>
 
 typedef void (^successBlock)();
-typedef void (^failureBlock)(NSError *error);
+typedef void (^failureBlock)(NSError* _Nonnull error);
 
 @interface NSOPulseMetric : NSObject
 
-@property (nonatomic, strong) NSString* api_base_domain;
+@property (nonatomic, strong) NSString* _Nonnull api_base_domain;
 
-- (NSOPulseMetric*) initWithAppID:(NSString*)app_id
-                        authToken:(unsigned int)token;
+- (NSOPulseMetric* _Nullable) initWithAppID:(NSString* _Nonnull)app_id
+                                  authToken:(unsigned int)token;
 
 - (void) sendLatency:(NSTimeInterval)latency
-               jobID:(NSString*)job_id
-      successHandler:(successBlock)success_handler
-      failureHandler:(failureBlock)failure_handler;
+               jobID:(NSString* _Nonnull)job_id
+      successHandler:(successBlock _Nullable)success_handler
+      failureHandler:(failureBlock _Nullable)failure_handler;
 
-- (NSString*) sendResolverMapping:(NSString*)job_id
-                   successHandler:(successBlock)success_handler
-                   failureHandler:(failureBlock)failure_handler;
+- (NSString* _Nonnull) sendResolverMapping:(NSString* _Nonnull)job_id
+                            successHandler:(successBlock _Nullable)success_handler
+                            failureHandler:(failureBlock _Nullable)failure_handler;
 
 @end

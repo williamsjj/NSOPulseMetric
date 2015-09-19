@@ -1,4 +1,4 @@
-# (C)2014 DigiTar, All Rights Reserved
+# (C)2015 DigiTar, All Rights Reserved
 # 
 # Redistribution and use in source and binary forms, with or without modification, 
 #    are permitted provided that the following conditions are met:
@@ -25,7 +25,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "NSOPulseMetric"
-  s.version          = "0.6.2"
+  s.version          = "0.7.0"
   s.summary          = "Cocoa library for transmitting NSONE Pulse metrics."
   s.homepage         = "https://github.com/williamsjj/NSOPulseMetric"
   s.license          = 'BSD'
