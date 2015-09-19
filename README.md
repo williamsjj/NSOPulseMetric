@@ -14,9 +14,8 @@ NSOPulseMetric* pulse_metric = [[NSOPulseMetric alloc] initWithAppID:@"nmkj234"
 [pulse_metric sendLatency:1.0 //NSTimeInterval in secs
 				    jobID:@"def456"
            successHandler:^{ /*Success callback...can be nil*/ }
-           failureHandler:^(AFHTTPRequestOperation *operation, NSError *error) {
-               NSLog(@"NSONE Latency Transmission Error (%@)(%@)",
-                     operation,
+           failureHandler:^(NSError *error) {
+               NSLog(@"NSONE Latency Transmission Error (%@)",
                      error);
            }];
 ```
@@ -29,9 +28,8 @@ NSOPulseMetric* pulse_metric = [[NSOPulseMetric alloc] initWithAppID:@"zxs123"
     
 [pulse_metric sendResolverMapping:@"abc123"
 				   successHandler:^{ /*Success callback...can be nil*/ }
-                   failureHandler:^(AFHTTPRequestOperation *operation, NSError *error) {
-                       NSLog(@"NSONE Resolver Mapping Transmission Error (%@)(%@)",
-                             operation,
+                   failureHandler:^(NSError *error) {
+                       NSLog(@"NSONE Resolver Mapping Transmission Error (%@)",
                              error);
 }];
 ```
