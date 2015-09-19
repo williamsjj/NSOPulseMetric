@@ -84,15 +84,24 @@
     
     NSMutableURLRequest* api_req = [NSMutableURLRequest requestWithURL:api_url];
     
-    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:api_req];
-    operation.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation* operation, id responseObject) {
-        if(success_handler) {
-            success_handler();
-        }
-    } failure:failure_handler];
+    AFHTTPSessionManager* sess_mgr = [AFHTTPSessionManager manager];
+    sess_mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    [operation start];
+    NSURLSessionDataTask* latency_task = [sess_mgr dataTaskWithRequest:api_req completionHandler:^(NSURLResponse * _Nonnull response,
+                                                                                                    id  _Nonnull responseObject,
+                                                                                                    NSError * _Nonnull error) {
+        if(!error) {
+            if(success_handler) {
+                success_handler();
+            }
+        } else {
+            if(failure_handler) {
+                failure_handler(error);
+            }
+        }
+    }];
+    
+    [latency_task resume];
 }
 
 - (NSString*) sendResolverMapping:(NSString*)job_id
@@ -112,15 +121,24 @@
     
     NSMutableURLRequest* api_req = [NSMutableURLRequest requestWithURL:api_url];
     
-    AFHTTPRequestOperation* operation = [[AFHTTPRequestOperation alloc] initWithRequest:api_req];
-    operation.responseSerializer = [AFHTTPResponseSerializer serializer];
-    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation* operation, id responseObject) {
-        if(success_handler) {
-            success_handler();
-        }
-    } failure:failure_handler];
+    AFHTTPSessionManager* sess_mgr = [AFHTTPSessionManager manager];
+    sess_mgr.responseSerializer = [AFHTTPResponseSerializer serializer];
     
-    [operation start];
+    NSURLSessionDataTask* resolver_task = [sess_mgr dataTaskWithRequest:api_req completionHandler:^(NSURLResponse * _Nonnull response,
+                                                                                                     id  _Nonnull responseObject,
+                                                                                                     NSError * _Nonnull error) {
+        if(!error) {
+            if(success_handler) {
+                success_handler();
+            }
+        } else {
+            if(failure_handler) {
+                failure_handler(error);
+            }
+        }
+    }];
+    
+    [resolver_task resume];
     
     return rand_domain;
 }

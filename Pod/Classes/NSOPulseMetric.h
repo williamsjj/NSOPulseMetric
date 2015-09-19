@@ -37,7 +37,7 @@
 #import <AFNetworking.h>
 
 typedef void (^successBlock)();
-typedef void (^failureBlock)(AFHTTPRequestOperation *operation, NSError *error);
+typedef void (^failureBlock)(NSError *error);
 
 @interface NSOPulseMetric : NSObject
 
