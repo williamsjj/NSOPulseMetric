@@ -1,3 +1,7 @@
+# 1.0.5 #
+
+* __Fixed.__ Updated Podspec description to properly refer to NS1 Pulsar instead of NSONE Pulse.
+
 # 1.0.4 #
 
 * __Fixed.__ README corrected to indicate now available on CocoaPods.
