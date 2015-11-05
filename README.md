@@ -46,7 +46,7 @@ NSOPulseMetric* pulse_metric = [[NSOPulseMetric alloc] initWithAppID:@"zxs123"
 
 ## Installation
 
-(Not yet in CocoaPods, use local link version below) NSOPulseMetric is available through [CocoaPods](http://cocoapods.org). To install
+NSOPulseMetric is available through [CocoaPods](https://cocoapods.org/pods/NSOPulseMetric). To install
 it, simply add the following line to your Podfile:
 
     pod "NSOPulseMetric"

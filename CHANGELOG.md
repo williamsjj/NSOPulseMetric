@@ -1,3 +1,7 @@
+# 1.0.4 #
+
+* __Fixed.__ README corrected to indicate now available on CocoaPods.
+
 # 1.0.3 #
 
 * __Enhancement.__ Added CHANGELOG and AppleDoc for API.

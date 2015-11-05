@@ -25,7 +25,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "NSOPulseMetric"
-  s.version          = "1.0.3"
+  s.version          = "1.0.4"
   s.summary          = "Cocoa library for transmitting NSONE Pulse metrics."
   s.homepage         = "https://github.com/williamsjj/NSOPulseMetric"
   s.license          = 'BSD'
