@@ -1,5 +1,10 @@
 # NSOPulseMetric
 
+NSOPulseMetric enables Objective-C/Swift programs to send client latency metrics and DNS resolver mappings to [NS1](https://ns1.com)'s Pulsar service. This lets NS1 provide more accurate (DNS-based) geo-load balancing for your clients.
+
+More info on NS1 Pulsar: [ns1.com/platform/pulsar](https://ns1.com/platform/pulsar)
+
+(You can sign up for an NS1 account here: [ns1.com/signup](https://ns1.com/signup)).
 
 ## Usage
 
