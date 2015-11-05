@@ -34,11 +34,48 @@
 
 #import <Foundation/Foundation.h>
 
+/**
+ *  Utility functions needed by NSOPulseMetric.
+ *  @see NSOPulseMetric
+ */
 @interface NSOUtility : NSObject
 
+/**
+ *  Generates a unique transaction ID for an NS1 API reqeust.
+ *
+ *  @return Returns a random number bounded between 0 and UINT_MAX.
+ */
 + (NSUInteger) transactionNumber;
+
+/**
+ *  Encodes a base10 unsigned integer as a base36 NSString.
+ *
+ *  @param base10_input Unsigned integer to encode.
+ *
+ *  @return Base36-encoded string version of base10_input.
+ */
 + (NSString*) base36Encode:(NSUInteger)base10_input;
+
+/**
+ *  Computes an authentication signature for the API request
+ *  by using the request's transactionNumber: and the 
+ *  NS1 API authentication token.
+ *
+ *  @param transaction_number NS1 API request transaction number
+ *  @param token              NS1 API authentication token.
+ *
+ *  @return Signature usable for authenticating NS1 API request identified by transaction_number.
+ *  @see transactionNumber:
+ */
 + (NSString*) signature:(NSUInteger)transaction_number usingToken:(NSUInteger)token;
+
+/**
+ *  Generates a random string of the requested length from the set: a-z0-9.
+ *
+ *  @param len Desired length for the random string.
+ *
+ *  @return Generated random string value.
+ */
 + (NSString*) randomStringWithLength:(NSUInteger)len;
 
 @end
