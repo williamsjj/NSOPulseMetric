@@ -34,7 +34,7 @@
 ////////////////////////////////////////////////////////////////////
 
 #import <Foundation/Foundation.h>
-#import <AFNetworking.h>
+#import <AFNetworking/AFNetworking.h>
 
 typedef void (^successBlock)();
 typedef void (^failureBlock)(NSError* _Nonnull error);
