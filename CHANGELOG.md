@@ -1,6 +1,7 @@
 # 1.0.6 #
 
 * __Enhancement.__ Updated AFNetworking dependency to 3.x.
+* __Enhancement.__ Made dynamic Framework friendly.
 
 # 1.0.5 #
 
