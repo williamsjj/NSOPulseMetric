@@ -35,6 +35,7 @@
 
 #import "NSOPulseMetric.h"
 #import "NSOUtility.h"
+#import "AFNetworking.h"
 
 #define kBaseAPIDomain @"ns1p.net"
 
